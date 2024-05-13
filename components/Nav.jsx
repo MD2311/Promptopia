@@ -15,10 +15,11 @@ const Nav = () => {
     const setProviders = async () => {
       const response = await getProviders();
 
-      setProviders(response);
+      setProviders(response); 
 
-      setProviders();
-    };
+9    };
+
+    setProviders();
   }, []);
 
   return (
