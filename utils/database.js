@@ -10,8 +10,11 @@ export const connectToDB = async () => {
     return;
   }
 
+  // Get MongoDB URI from environment variables
+  const uri = process.env.MONGODB_URI;
+
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
+    await mongoose.connect(uri, {
       dbName: "share_prompt",
     });
 
