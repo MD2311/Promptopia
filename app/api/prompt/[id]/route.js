@@ -1,5 +1,3 @@
-
-
 import Prompt from "@models/prompt";
 import { connectToDB } from "@utils/database";
 
@@ -40,14 +38,15 @@ export const PATCH = async (request, { params }) => {
 };
 
 // Delete (delete)
-export const DELETE = async (request, { params}) => {
-    try{
-        await connectToDB();
+export const DELETE = async (request, { params }) => {
+  try {
+    await connectToDB();
 
-        await Prompt.findByIdAndRemove(params.id);
+    // Find the prompt by ID and remove it
+    await Prompt.findByIdAndRemove(params.id);
 
-        return new Response("Prompt deleted successfully", {status : 200})
-    } catch(error){
-        return new Response("Failed to delete prompt", {status: 500})
-    }
-}
+    return new Response("Prompt deleted successfully", { status: 200 });
+  } catch (error) {
+    return new Response("Error deleting prompt", { status: 500 });
+  }
+};
