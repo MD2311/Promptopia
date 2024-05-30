@@ -1,27 +1,17 @@
-"use client";
-
 import { useEffect, useState, Suspense } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@components/Form";
 
-// Custom suspense wrapper for useSearchParams()
-const SuspenseFallback = ({ children }) => {
-  return <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>;
-};
-
 const UpdatePrompt = () => {
   const router = useRouter();
+
+  // Use useSearchParams() directly
+  const searchParams = useSearchParams();
+  const promptId = searchParams.get("id");
+
   const [post, setPost] = useState({ prompt: "", tag: "" });
   const [submitting, setIsSubmitting] = useState(false);
-
-  // Wrap the usage of useSearchParams() inside Suspense
-  const searchParams = (
-    <SuspenseFallback>
-      <useSearchParams />
-    </SuspenseFallback>
-  );
-  const promptId = searchParams.get("id");
 
   useEffect(() => {
     const getPromptDetails = async () => {
