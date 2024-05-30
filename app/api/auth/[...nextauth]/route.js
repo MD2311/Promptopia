@@ -11,17 +11,24 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  callback: {
+  callbacks: {
     async session({ session }) {
-      const sessionUser = await User.findOne({
-        email: session.user.email,
-      });
+      try {
+        await connectToDB();
 
-      session.user.id = sessionUser._id.toString();
+        const sessionUser = await User.findOne({ email: session.user.email });
+        if (sessionUser) {
+          session.user.id = sessionUser._id.toString();
+        } else {
+          console.error("No user found with email: ", session.user.email);
+        }
 
-      return session;
+        return session;
+      } catch (error) {
+        console.error("Error in session callback: ", error);
+        return session;
+      }
     },
-
     async signIn({ profile }) {
       try {
         await connectToDB();
