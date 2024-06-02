@@ -5,20 +5,19 @@ import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Nav = () => {
-
   const [providers, setProviders] = useState(null);
 
   const [toggleDropdown, settoggleDropdown] = useState(false);
-  const {data:session} = useSession();
-  console.log(useSession())
+  const { data: session } = useSession();
 
   useEffect(() => {
     const setUpProviders = async () => {
       const response = await getProviders();
-      
-      setProviders(response); 
 
-9    };
+      setProviders(response);
+
+      9;
+    };
 
     setUpProviders();
   }, []);

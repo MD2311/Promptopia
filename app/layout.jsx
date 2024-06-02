@@ -12,16 +12,18 @@ const Rootlayout = ({ children }) => {
   return (
     <html lang="en">
       <body>
-        <Provider>
-          <div className="main">
-            <div className="gradient"></div>
-          </div>
+        
+          <Provider>
+            <div className="main">
+              <div className="gradient"></div>
+            </div>
 
-          <main className="app">
-            <Nav></Nav>
-            {children}
-          </main>
-        </Provider>
+            <main className="app">
+              <Nav></Nav>
+              {children}
+            </main>
+          </Provider>
+        
       </body>
     </html>
   );
